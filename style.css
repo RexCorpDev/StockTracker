@@ -1,0 +1,44 @@
+
+body {
+  background-color: black;
+  color: #3c7e2b;
+}
+
+h1 {
+  text-align: center;
+}
+
+div.header {
+  text-align: center;
+}
+
+hr {
+ border-top: rgb(20, 123, 143) !important;
+}
+
+well {
+  width: 50px;
+}
+.symbol-card, .quote-card {
+  display: inline;
+  margin: 5px;
+  font-size: 16px;
+  height: 100px;
+  width: 200px;
+  /*border: 2px solid #212622;*/
+}
+
+input {
+  color: #000000;
+  width: 220px;
+}
+
+button {
+  height: 90%;
+  font-weight: bold !important;
+  color: black !important;
+}
+
+.saveSymbol, .showFaves, .showEdit, .deleteSelected {
+  visibility: hidden;
+}
