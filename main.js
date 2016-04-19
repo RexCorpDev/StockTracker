@@ -123,7 +123,7 @@ function Search(event){
   })
 
 }
-git
+
 function Save(event){
   event.preventDefault();
   var $checkedStocks = [];
