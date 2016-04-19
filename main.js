@@ -12,6 +12,24 @@
 
 
 $(function(){
+  // ----------- STOCK STORAGE -----------------
+  var Storage = {
+    getWorkingCopy: function () {
+      try {
+        var currentLS = JSON.parse(localStorage.stocks);
+      } catch (err) {
+        var currentLS = [];
+        // console.log(err);
+      }
+      var workingLS = currentLS;
+      return workingLS;
+    },
+    writeToLocalStorage: function (workingLS) {
+      var LScpy_AfterSplice = workingLS;
+      localStorage.stocks = JSON.stringify(workingLS);
+    }
+  }
+
   /** check for LocalStorage, if found, reveal: SHOW, EDIT*/
   if(Storage.getWorkingCopy().length > 0){
     $('.showFaves').css('visibility', 'visible');
@@ -44,20 +62,20 @@ function ShowFaves(event){
     $.getJSON(`http://dev.markitondemand.com/MODApis/Api/v2/Lookup/jsonp?input=${LocalStock[i]}&callback=?`).done(function(data){
       var $UpdatedSymbols = data;
       var $sResultsForDOM = $UpdatedSymbols.map(renderSearch);
-      // console.log($sResultsForDOM);
+      console.log($sResultsForDOM);
       $('.searchResults').append($sResultsForDOM);
     });
   }; /* end of FOR loop */
 
   /* GET-MARKET DATA */
   var $caughtQuote = [];
+  var $UpdatedQuote = [];
   for(var i = 0; i < LocalStock.length; i++){
     $.getJSON(`http://dev.markitondemand.com/MODApis/Api/v2/Quote/jsonp?symbol=${LocalStock[i]}&callback=?`).done(function(data){
       var $UpdatedQuotes = data;
       var $qResultsForDOM = $UpdatedQuotes.map(renderQuote);
-
-      //console.log($qResultsForDOM);
-      // $(`#${data.symbol}`).append($qResultsForDOM);
+      console.log($qResultsForDOM);
+      $(`#${data.symbol}`).append($qResultsForDOM);
     });
   }; /* end of FOR loop */
 
@@ -123,7 +141,7 @@ function Search(event){
   })
 
 }
-git
+
 function Save(event){
   event.preventDefault();
   var $checkedStocks = [];
@@ -162,12 +180,12 @@ function renderQuote(data){
   var $Low = $('<span>').addClass('Low result  col-xs-12').text(`Symbol: ${data.Low}`);
   var $Close = $('<span>').addClass('close result  col-xs-12').text(`Symbol: ${data.Close}`);
 
-  console.log($qCard);
-  console.log($qSymbol);
-  console.log($Open);
-  console.log($High);
-  console.log($Low);
-  console.log($Close);
+  console.log();
+    console.log();
+      console.log();
+        console.log();
+          console.log();
+          console.log();
 
 
   $qCard.append($Open, $High, $Low, $Close);
@@ -191,23 +209,4 @@ function renderSearch(data){
   $Card.append($Exchange, $Name, $sSymbol);
 
   return $Card;
-}
-
-
-// ----------- STOCK STORAGE -----------------
-var Storage = {
-  getWorkingCopy: function () {
-    try {
-      var currentLS = JSON.parse(localStorage.stocks);
-    } catch (err) {
-      var currentLS = [];
-      // console.log(err);
-    }
-    var workingLS = currentLS;
-    return workingLS;
-  },
-  writeToLocalStorage: function (workingLS) {
-    var LScpy_AfterSplice = workingLS;
-    localStorage.stocks = JSON.stringify(workingLS);
-  }
 }
