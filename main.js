@@ -12,23 +12,6 @@
 
 
 $(function(){
-  // ----------- STOCK STORAGE -----------------
-  var Storage = {
-    getWorkingCopy: function () {
-      try {
-        var currentLS = JSON.parse(localStorage.stocks);
-      } catch (err) {
-        var currentLS = [];
-        // console.log(err);
-      }
-      var workingLS = currentLS;
-      return workingLS;
-    },
-    writeToLocalStorage: function (workingLS) {
-      var LScpy_AfterSplice = workingLS;
-      localStorage.stocks = JSON.stringify(workingLS);
-    }
-  }
 
   /** check for LocalStorage, if found, reveal: SHOW, EDIT*/
   if(Storage.getWorkingCopy().length > 0){
@@ -209,4 +192,22 @@ function renderSearch(data){
   $Card.append($Exchange, $Name, $sSymbol);
 
   return $Card;
+}
+
+// ----------- STOCK STORAGE -----------------
+var Storage = {
+  getWorkingCopy: function () {
+    try {
+      var currentLS = JSON.parse(localStorage.stocks);
+    } catch (err) {
+      var currentLS = [];
+      // console.log(err);
+    }
+    var workingLS = currentLS;
+    return workingLS;
+  },
+  writeToLocalStorage: function (workingLS) {
+    var LScpy_AfterSplice = workingLS;
+    localStorage.stocks = JSON.stringify(workingLS);
+  }
 }
