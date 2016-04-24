@@ -56,7 +56,7 @@ function ShowFaves(event){
   for(var i = 0; i < LocalStock.length; i++){
     $.getJSON(`http://dev.markitondemand.com/MODApis/Api/v2/Quote/jsonp?symbol=${LocalStock[i]}&callback=?`).done(function(data){
       var $UpdatedQuotes = data;
-      var $qResultsForDOM = $UpdatedQuotes.map(renderQuote);
+      var $qResultsForDOM = $UpdatedQuotes.map(console.log(renderQuote));
       console.log($qResultsForDOM);
       $(`#${data.symbol}`).append($qResultsForDOM);
     });
@@ -183,6 +183,7 @@ function renderEdit(data){
   // return $Card;
 }
 
+/* Create HTML in one group for application to the DOM */
 function renderSearch(data){
   var $Card = $('<div>').attr('id', data.Symbol).addClass('symbol-card result  col-xs-12');
   var $Exchange = $('<span>').addClass('stock result  col-xs-12').text(`Exchange: ${data.Exchange}`);
